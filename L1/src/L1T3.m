@@ -1,5 +1,15 @@
 rng(42); % репродуцируемые случайные значения
 
+clear
+clc
+close all
+
+img_path = ".\..\img\";
+
+if ~exist(img_path, 'dir')
+    mkdir(img_path)
+end
+
 %% Дано
 A = [-3 1 5;...
      3 -4 1;...
@@ -17,7 +27,7 @@ dxdt = @(t, x) A*x; % моделируемая система
 
 [t, y] = ode45(dxdt, tspan, x0);
 
-figure
+h = figure;
 plot(t, y);
 title("Без управления");
 subtitle(sprintf('x_0 = [%0.3f %0.3f %0.3f]', x0));
@@ -26,14 +36,19 @@ ylabel('x');
 legend('x_1', 'x_2', 'x_3');
 grid on
 
-%% Те же начальные условия, но с управлением (ассимптотическая устойчивость)
+print(h, img_path + "no_control", '-dpng', '-r300')
+
+lambda_open = eig(A);
+
+%% Те же начальные условия, но с управлением 
+% (ассимптотическая устойчивость)
 k = -max(real(eig(A))); % граничный коэффициент усиления k*
 u = @(x) k*x; % управление системы
 dxdt = @(t, x) A*x + B*u(x); % моделируемая система
 
 [t, y] = ode45(dxdt, tspan, x0);
 
-figure
+h = figure;
 plot(t, y);
 title("С управлением (Ассимптотическая устойчивость)");
 subtitle(sprintf('x_0 = [%0.3f %0.3f %0.3f]; k=%0.3f', x0, k));
@@ -42,38 +57,6 @@ ylabel('x');
 legend('x_1', 'x_2', 'x_3');
 grid on
 
-%% Те же начальные условия, но с неустойчивым управлением (k > k*)
-k = k + 0.01; % граничный коэффициент усиления k*
-u = @(x) k*x; % управление системы
-dxdt = @(t, x) A*x + B*u(x); % моделируемая система
+print(h, img_path + "assymp_control", '-dpng', '-r300')
 
-[t, y] = ode45(dxdt, tspan, x0);
-
-figure
-plot(t, y);
-title("С неустойчивым управлением");
-subtitle(sprintf('x_0 = [%0.3f %0.3f %0.3f]; k=%0.3f', x0, k));
-xlabel('t');
-ylabel('x');
-legend('x_1', 'x_2', 'x_3');
-grid on
-
-%% Те же начальные условия, но с устойчивым управлением (k < k*)
-k = k - 0.02; % граничный коэффициент усиления k*
-u = @(x) k*x; % управление системы
-dxdt = @(t, x) A*x + B*u(x); % моделируемая система
-
-[t, y] = ode45(dxdt, tspan, x0);
-
-figure
-plot(t, y);
-title("С устойчивым управлением");
-subtitle(sprintf('x_0 = [%0.3f %0.3f %0.3f]; k=%0.3f', x0, k));
-xlabel('t');
-ylabel('x');
-legend('x_1', 'x_2', 'x_3');
-grid on
-
-%% Окончание выполнения
-input("press any key\n");
-close all
+lambda_closed = eig(A + k*B);
