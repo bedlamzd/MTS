@@ -5,3 +5,6 @@
 *.log
 *.gz
 *.pdf
+*.asv
+*.pygstyle
+*.pygtex
