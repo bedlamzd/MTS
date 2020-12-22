@@ -1,3 +1,7 @@
+clear
+clc
+close all
+
 A = [-2 1;...
      1 -2];
 B = [0;
@@ -22,7 +26,8 @@ disp(lambda);
 % то система устойчива
 
 syms s
+w = sym('w', 'real');
 W(s) = C'*(s*eye(length(A)) - A)^-1*B;
 W_0(s) = -W(s);
 
-real((1+mu1*W_0(j*w))*conj(1+mu2*W_0(j*w)))
+real((1+mu1*W_0(1i*w))*conj(1+mu2*W_0(1i*w)))
