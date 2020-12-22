@@ -66,7 +66,7 @@
     \begin{equation*}
         \begin{aligned}
             \lambda_1 &= -6.30 \\
-            \lambda_2 &= -2.70\\
+            \lambda_2 &= -2.70
         \end{aligned}
     \end{equation*}
 
@@ -75,6 +75,7 @@
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.7\textwidth]{phase.png}
+        \caption{}
     \end{figure}
 
     \subsubsection*{Метод функций Ляпунова}
@@ -94,11 +95,74 @@
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.7\textwidth]{initial.png}
+        \caption{}
     \end{figure}
 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.7\textwidth]{linearized.png}
+        \caption{}
     \end{figure}
 
+    \section*{Задание 2}
+    Дана нелинейная система
+    \begin{equation*}
+        \left\{
+        \begin{aligned}
+            \dot{x} &= Ax + b\xi,& \sigma = c^*x\\
+            \xi &= \varphi(\sigma, t)=\dfrac{e^{\sigma} - e^{-\sigma}}{e^{\sigma} + e^{-\sigma}}&
+        \end{aligned}
+        \right.
+    \end{equation*}
+    \begin{equation*}
+        A =
+        \begin{bmatrix}
+            -2& 1\\
+            1& -2
+        \end{bmatrix}
+        , b =
+        \begin{bmatrix}
+            1\\
+            0
+        \end{bmatrix}
+        , c =
+        \begin{bmatrix}
+            1\\
+            0
+        \end{bmatrix}
+    \end{equation*}
+
+    С помощью кругового критерия доказать экспоненциальную устойчивость системы.
+
+    \subsection*{Решение}
+    \subsubsection*{Проверим выполнение секторного условия}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{phi_sector.png}
+        \caption{$\varphi(\sigma, t)$, ограниченная сектором}
+    \end{figure}
+
+    \[\mu_1 \leq \dfrac{\varphi(\sigma, t)}{\sigma} \leq \mu_2 \]
+    \[\mu_1\sigma \leq \dfrac{e^{\sigma} - e^{-\sigma}}{e^{\sigma} + e^{-\sigma}} \leq \mu_2\sigma \]
+    \[\mu_1 \leq \dfrac{4}{(e^{\sigma} + e^{-\sigma})^2} \leq \mu_2 \]
+    \[\mu_1 = 0,\,\mu_2 = 1\]
+
+    \subsubsection*{Проверим собственные значения матрицы}
+    Собственные числа матрицы $A$
+    \begin{equation*}
+        \begin{aligned}
+            \lambda_1 &= -3 \\
+            \lambda_2 &= -1
+        \end{aligned}
+    \end{equation*}
+
+    Матрица не имеет чисто мнимых собственных значений.
+
+    \subsubsection*{Проверим ассимптотическую устойчивость системы}
+    Выберем $\mu_0 = \mu_1 = 0$. Тогда исследуемая система примет вид $\dot{x}=Ax$. Так как собственные числа матрицы
+    известны и $Re(\lambda) < 0$, то матрица является гурвицевой, а следовательно система ассимптотически устойчива.
+
+    \subsubsection*{Проверим <<частотное условие>>}
+
+    
 \end{document}
