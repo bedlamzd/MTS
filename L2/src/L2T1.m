@@ -1,4 +1,15 @@
 rng(42);
+
+clear
+clc
+close all
+
+img_path = ".\..\img\";
+
+if ~exist(img_path, 'dir')
+    mkdir(img_path)
+end
+
 %% Дана система
 
 f = @(x) [
@@ -48,6 +59,8 @@ ylabel("x2");
 axis tight equal;
 grid on
 
+print(h, img_path + "phase", '-dpng', '-r300')
+
 %% Построим графики систем
 t0 = 0;
 tf = 10;
@@ -56,7 +69,7 @@ tspan = [t0 tf]; % пределы графика
 %% Исходная система
 [t, y] = ode45(@(t, x) f(x), tspan, x0);
 
-figure
+h = figure;
 plot(t, y);
 title("Исходная система");
 subtitle(sprintf('x_0 = [%0.3f %0.3f]', x0));
@@ -65,10 +78,12 @@ ylabel('x');
 legend('x_1', 'x_2');
 grid on
 
+print(h, img_path + "initial", '-dpng', '-r300')
+
 %% Линеаризованая система
 [t, y] = ode45(@(t, x) f_lin(x), tspan, x0);
 
-figure
+h = figure;
 plot(t, y);
 title("Линеаризованая система");
 subtitle(sprintf('x_0 = [%0.3f %0.3f]', x0));
@@ -77,6 +92,4 @@ ylabel('x');
 legend('x_1', 'x_2');
 grid on
 
-%% Окончание выполнения
-input("press any key\n");
-close all
+print(h, img_path + "linearized", '-dpng', '-r300')
