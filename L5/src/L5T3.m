@@ -28,7 +28,6 @@ tspan = [0 MaxTime];
 tgrid = linspace(MinTime, MaxTime, 1000);
 
 % Solving
-control = false;
 sol = dde23(dx, h, phi, tspan);
 x = deval(sol, tgrid);
 
