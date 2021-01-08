@@ -1,0 +1,34 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\defaultfontfeatures{Ligatures=TeX}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+\setmainfont{Times New Roman}
+\newfontfamily{\latinfont}{Times New Roman}
+\newfontfamily{\cyrillicfont}{Times New Roman}
+\newfontfamily{\cyrillicfonttt}{Courier New}
+
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{subcaption}
+%\usepackage[caption=false]{subfig}
+\geometry{right=20mm}
+\geometry{left=20mm}
+\geometry{top=20mm}
+\geometry{bottom=20mm}
+
+\usepackage{indentfirst}
+\usepackage[outputdir=auxiliary]{minted}
+
+\graphicspath{{../img/}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\C}{\mathbb{C}}
+\renewcommand{\Re}{\mathrm{Re}}
+\renewcommand{\Im}{\mathrm{Im}}
