@@ -6,11 +6,9 @@ rng(42);
 
 img_path = ".\..\img\";
 
-if exist(img_path, 'dir')
-   rmdir(img_path, 's'); 
+if ~exist(img_path, 'dir')
+   mkdir(img_path);
 end
-
-mkdir(img_path);
 
 dxdt = @(x, r) [-x(1); r*x(2)- x(2)^3 + x(2)^5];
 

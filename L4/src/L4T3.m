@@ -4,11 +4,9 @@ close all
 
 img_path = ".\..\img\";
 
-if exist(img_path, 'dir')
-   rmdir(img_path, 's'); 
+if ~exist(img_path, 'dir')
+   mkdir(img_path);
 end
-
-mkdir(img_path);
 
 %% Дано
 initial_nom = [1 2];
